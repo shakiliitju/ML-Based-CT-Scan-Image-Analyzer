@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CT Scan Image Analyzer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>CT Scan Image Analyzer</h1>
+    <p class="subtitle">Perform basic analysis on CT scan images</p>
+    
+    <form id="uploadForm">
+      <div class="upload-section">
+        <input type="file" id="imageInput" name="image" accept="image/*" required />
+        <button type="submit">Analyze Image</button>
+      </div>
+    </form>
+
+    <div id="preview" class="section">
+      <h3>Image Preview:</h3>
+      <img id="previewImage" src="#" alt="Preview" style="display: none;" />
+    </div>
+
+    <div id="loading" class="loading" style="display: none;">
+      <div class="spinner"></div>
+      <p>Analyzing image...</p>
+    </div>
+
+    <div id="results" class="section" style="display: none;">
+      <div id="analysisSection" class="result-section">
+        <h3>Image Analysis Results:</h3>
+        <div id="analysisResults"></div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <p><strong>⚠️ DISCLAIMER:</strong> This tool is for educational purposes only. 
+      It cannot provide medical diagnoses. Always consult qualified medical professionals for proper interpretation of medical images.</p>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
