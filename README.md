@@ -5,7 +5,7 @@ This project is a web application for analyzing CT scan images using a machine l
 ## Features
 - Upload CT scan images for analysis
 - Basic image statistics (mean, std, edge count, etc.)
-- Machine learning prediction (RandomForest)
+- Machine learning prediction (RandomForestClassifier)
 - Educational disclaimer (not for medical use)
 
 ## Requirements
@@ -15,7 +15,7 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-1. Train your model (see `model.py` for an example) and save as `model.pkl` in the project folder.
+1. Train your model using `model.py`. The script loads images from `dataset/Data/train/<class_folder>` and saves the trained model as `model.pkl` in the project folder.
 2. Start the Flask app:
 ```
 python app.py
@@ -27,6 +27,7 @@ python app.py
 - `app.py` - Main Flask application
 - `model.py` - Example script to train and save a RandomForest model
 - `model.pkl` - Saved trained model
+- `dataset/Data/train/` - Training images organized in class folders
 - `requirements.txt` - Python dependencies
 - `static/` - Static files (JS, CSS)
 - `templates/` - HTML templates
