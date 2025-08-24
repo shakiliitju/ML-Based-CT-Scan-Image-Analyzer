@@ -98,9 +98,27 @@ def upload_image():
         prediction = model.predict(img_arr)
         prediction_label = str(prediction[0])
 
+
+        # Get class names from training folder
+        class_names = os.listdir('dataset/Data/train')
+        # Add generic descriptions for each class
+        class_descriptions = {}
+        for cname in class_names:
+            if 'adeno' in cname.lower():
+                class_descriptions[cname] = 'Adenocarcinoma: A type of lung cancer.'
+            elif 'squamous' in cname.lower():
+                class_descriptions[cname] = 'Squamous Cell Carcinoma: A type of lung cancer.'
+            elif 'large' in cname.lower():
+                class_descriptions[cname] = 'Large Cell Carcinoma: A type of lung cancer.'
+            elif 'normal' in cname.lower():
+                class_descriptions[cname] = 'Normal: No cancer detected.'
+            else:
+                class_descriptions[cname] = f'{cname}: No description available.'
         return jsonify({
             'analysis': analysis,
-            'model_prediction': prediction_label
+            'model_prediction': prediction_label,
+            'class_names': class_names,
+            'class_descriptions': class_descriptions
         })
 
     except Exception as e:

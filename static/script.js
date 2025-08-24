@@ -67,10 +67,33 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+
   function displayResults(data) {
     // Display analysis results
     if (data.analysis) {
       displayAnalysis(data.analysis);
+    }
+
+    // Display prediction result
+    const predictionResult = document.getElementById('predictionResult');
+    if (data.model_prediction !== undefined) {
+      let predText = data.model_prediction;
+      let description = '';
+      if (data.class_names && data.class_names.length > 0) {
+        const idx = parseInt(data.model_prediction);
+        if (!isNaN(idx) && idx >= 0 && idx < data.class_names.length) {
+          const cname = data.class_names[idx];
+          predText = `${cname} (${data.model_prediction})`;
+          if (data.class_descriptions && data.class_descriptions[cname]) {
+            description = `<div class='prediction-description'>${data.class_descriptions[cname]}</div>`;
+          }
+        }
+      }
+      predictionResult.innerHTML = `<span class="prediction-value">${predText}</span>${description}`;
+      document.getElementById('predictionSection').style.display = 'block';
+    } else {
+      predictionResult.innerHTML = '';
+      document.getElementById('predictionSection').style.display = 'none';
     }
 
     // Show results section
